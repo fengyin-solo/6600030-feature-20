@@ -207,6 +207,7 @@ export function buildTrussBeam(
   const dy = height / nDivY;
   const E = 200e9; // 200 GPa steel
   const A = 0.001; // 1000 mm²
+  const yieldStrength = 235e6; // 235 MPa, Q235 结构钢屈服强度
 
   const nodeGrid: number[][] = [];
   for (let iy = 0; iy <= nDivY; iy++) {
@@ -234,6 +235,7 @@ export function buildTrussBeam(
           nodeIds: [nodeGrid[iy][ix], nodeGrid[iy][ix + 1]],
           area: A,
           youngsModulus: E,
+          yieldStrength,
           stress: 0, strain: 0, force: 0,
         });
       }
@@ -244,6 +246,7 @@ export function buildTrussBeam(
           nodeIds: [nodeGrid[iy][ix], nodeGrid[iy + 1][ix]],
           area: A,
           youngsModulus: E,
+          yieldStrength,
           stress: 0, strain: 0, force: 0,
         });
       }
@@ -255,6 +258,7 @@ export function buildTrussBeam(
             nodeIds: [nodeGrid[iy][ix], nodeGrid[iy + 1][ix + 1]],
             area: A * 0.7,
             youngsModulus: E,
+            yieldStrength,
             stress: 0, strain: 0, force: 0,
           });
         } else {
@@ -263,6 +267,7 @@ export function buildTrussBeam(
             nodeIds: [nodeGrid[iy][ix + 1], nodeGrid[iy + 1][ix]],
             area: A * 0.7,
             youngsModulus: E,
+            yieldStrength,
             stress: 0, strain: 0, force: 0,
           });
         }

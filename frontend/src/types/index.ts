@@ -12,6 +12,7 @@ export interface Element {
   nodeIds: [number, number];  // 2-node truss element
   area: number;               // cross-section area (m²)
   youngsModulus: number;      // Pa
+  yieldStrength?: number;     // 屈服强度 (Pa)，用于风险评估，默认按结构钢 235 MPa
   stress: number;             // computed
   strain: number;             // computed
   force: number;              // computed
